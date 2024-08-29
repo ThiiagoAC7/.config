@@ -1,0 +1,362 @@
+#######################
+# ubuntu config: #
+#######################
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango: JetBrains Mono 11
+
+# set the mod key to the winkey:
+set $mod Mod4
+
+#####################
+# workspace layout: #
+#####################
+
+# default i3 tiling mode:
+workspace_layout default
+
+##############################
+# extra options for windows: #
+##############################
+
+#border indicator on windows:
+default_border pixel 0 
+
+# start browser
+bindsym $mod+b exec google-chrome-stable
+
+# thin borders
+hide_edge_borders both
+
+# Set inner/outer gaps
+gaps inner 4
+gaps outer 4
+
+# show window title bars (not officially supported with i3gaps)
+# default_border normal
+# window title alignment 
+title_align center
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# switch to workspace
+bindcode $mod+10    workspace  $ws1
+bindcode $mod+11    workspace  $ws2
+bindcode $mod+12    workspace  $ws3 
+bindcode $mod+13    workspace  $ws4 
+bindcode $mod+14    workspace  $ws5 
+bindcode $mod+15    workspace  $ws6
+bindcode $mod+16    workspace  $ws7
+bindcode $mod+17    workspace  $ws8
+bindcode $mod+18    workspace  $ws9
+bindcode $mod+19    workspace  $ws10
+
+# move focused container to workspace
+bindcode $mod+Shift+10    move container to workspace  $ws1
+bindcode $mod+Shift+11    move container to workspace  $ws2
+bindcode $mod+Shift+12    move container to workspace  $ws3
+bindcode $mod+Shift+13    move container to workspace  $ws4
+bindcode $mod+Shift+14    move container to workspace  $ws5
+bindcode $mod+Shift+15    move container to workspace  $ws6
+bindcode $mod+Shift+16    move container to workspace  $ws7
+bindcode $mod+Shift+17    move container to workspace  $ws8
+bindcode $mod+Shift+18    move container to workspace  $ws9
+bindcode $mod+Shift+19    move container to workspace  $ws10
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+######################################
+# keybindings for different actions: #
+######################################
+
+# start a terminal
+bindsym $mod+Return exec --no-startup-id wezterm 
+
+# kill focused window
+bindsym $mod+q kill
+
+# exit-menu
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu/type-1/powermenu.sh
+
+# Lock the system
+# lock by blurring the screen:
+bindsym $mod+Shift+d exec --no-startup-id ~/.config/i3/scripts/blur-lock
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to update i3)
+bindsym $mod+Shift+r restart
+
+
+# Backlight control
+#bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +10 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
+#bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -10 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
+# Backlight setting using dunst osc
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_down
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Tab focus right 
+bindsym $mod+Shift+Tab focus left 
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+s split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+# bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+p focus parent
+
+# Multimedia Keys
+
+# volume
+# use meta keys without showing osc
+#bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
+#bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+# use meta keys showing osc using dunst
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_down
+
+# gradular volume control
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
+
+# mute
+#bindsym XF86AudioMute exec --no-startup-id amixer sset Master toggle && killall -USR1 i3blocks
+# use meta keys showing osc using dunst
+bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_mute
+
+# mic mute toggle
+bindsym XF86AudioMicMute exec amixer sset Capture toggle
+
+# audio control
+bindsym XF86AudioPlay exec --no-startup-id playerctl play
+bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
+# Redirect sound to headphones
+# bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
+
+## App shortcuts
+bindsym Print exec --no-startup-id scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/Screenshots/$(date +"%Y-%m-%d-%T")-screenshot.png"
+
+# printscreen
+bindsym $mod+Shift+s exec gnome-screenshot -i
+
+##########################################
+# configuration for workspace behaviour: #
+##########################################
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+##############
+# compositor #
+##############
+
+# picom: https://wiki.archlinux.org/title/Picom
+# manpage: https://man.archlinux.org/man/picom.1.en
+# The default configuration is available in /etc/xdg/picom.conf 
+# for custom config: exec_always --no-startup-id picom --config  ~/.config/picom.conf
+exec_always --no-startup-id picom -b --fade-in-step=1 --fade-out-step=1 --fade-delta=0 --config ~/.config/picom/picom.conf
+
+# configure multiple keyboard layouts and hotkey to switch (Win+Space in this example)
+exec_always --no-startup-id setxkbmap -layout 'us,br' -option 'grp:win_space_toggle'
+
+# set monitor config with autorandr
+exec --no-startup-id autorandr --change --skip-option crtc
+
+# set wallpaper
+# exec --no-startup-id sleep 2 && nitrogen --restore
+# exec_always --no-startup-id sleep 1 && feh --bg-fill ~/Wallpapers/a_road_with_cars_driving_on_it.png
+exec_always --no-startup-id sleep 1 && ~/set_wallpaper
+
+# Desktop notifications
+# dunst config used ~/.config/dunst/dunstrc
+# set alternative config if needed:
+exec --no-startup-id /usr/bin/dunst --config ~/.config/dunst/dunstrc
+# may need to run dbus-launch explicitly: 
+#exec --no-startup-id dbus-launch /usr/bin/dunst
+# exec --no-startup-id /usr/bin/dunst
+# alternative if you installed aside with XFCE4:
+# exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
+
+
+###############
+# system tray #
+###############
+# if you do not use dex: exec --no-startup-id dex --autostart --environment i3
+# you need to have tray apps started manually one by one:
+
+# start blueberry app for managing bluetooth devices from tray:
+#exec --no-startup-id blueberry-tray
+
+# networkmanager-applet
+exec --no-startup-id nm-applet
+
+# no ibus
+exec --no-startup-id ibus exit
+
+##################
+# floating rules #
+##################
+
+
+# set floating (nontiling) for special apps
+for_window [window_role="About"] floating enable
+
+# set size of floating window
+for_window [window_role="(?i)GtkFileChooserDialog"] resize set 640 480 #to set size of file choose dialog
+
+# set position of floating window
+for_window [class=".*"] move position center
+
+######################################
+# color settings for bar and windows #
+######################################
+
+# Define colors variables:
+set $darkbluetrans	#08052be6
+set $darkblue		#08052b
+set $lightblue		#5294e2
+set $urgentred		#e53935
+set $white		#ffffff
+set $black		#000000
+set $black-alt  #202020
+set $purple		#e345ff
+set $darkgrey		#383c4a
+set $grey		#b0b5bd
+set $mediumgrey		#8b8b8b
+set $yellowbrown	#e1b700
+set $cyan           #00b5bd
+
+# define colors for windows:
+#class		        	    border		bground		text		indicator	    child_border    
+client.focused		    	$white      $black-alt  $white		$cyan	        $cyan
+client.unfocused	    	$darkblue	$black-alt  $grey		$darkgrey	    $darkgrey
+client.focused_inactive		$darkblue	$black-alt  $grey		$black		    $black
+client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
+
+############################################
+# bar settings (input comes from i3blocks) #
+############################################
+
+# Start i3bar to display a workspace bar
+# (plus the system information i3status finds out, if available)
+# bar {
+#     font pango: JetBrains Mono 11
+#     status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#     position top
+#     # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
+#     # reference: https://i3wm.org/docs/userguide.html#_tray_output
+#     #tray_output primary
+#     tray_padding 0
+#
+#     # When strip_workspace_numbers is set to yes,
+#     # any workspace that has a name of the form
+#     # “[n][:][NAME]” will display only the name.
+#     strip_workspace_numbers yes
+#     ##strip_workspace_name no
+#
+#     colors {
+#         separator          $purple
+#         background         $darkgrey
+#         statusline         $white
+#         # border 		    bg		        txt		    indicator
+#         focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
+#         active_workspace	$lightblue      $mediumgrey	$darkgrey	$purple
+#         inactive_workspace	$darkgrey       $darkgrey	$grey		$purple
+#         urgent_workspace	$urgentred	    $urgentred	$white		$purple
+# 	}
+# }
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+#####################################
+# Application menu handled by rofi: #
+#####################################
+
+## rofi bindings fancy application menu ($mod+d /F9 optional disabled)
+
+# bindsym $mod+a exec --no-startup-id rofi -modi drun -show drun \ -config ~/.config/rofi/rofidmenu.rasi
+bindsym $mod+a exec --no-startup-id ~/.config/rofi/launchers/type-1/launcher.sh
+
