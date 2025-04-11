@@ -2,6 +2,16 @@
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH="$PATH:/opt/nvim/" 
 export PATH="$PATH:/usr/local/go/bin"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH=$PATH:/home/thiago/.spicetify
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
+
 
 # sudo permission to nvim 
 export SUDO_EDITOR="nvim"
@@ -30,6 +40,7 @@ bindkey '^y' autosuggest-accept
 source $ZSH/oh-my-zsh.sh
 
 # personal
+alias v="nvim"
 alias vim="nvim"
 alias exp="open"
 alias py="python"
@@ -65,6 +76,15 @@ eval "$(starship init zsh)"
 
 function set_win_title() { # set window title as cwd
     echo -ne "\033]0; $(basename "$PWD") \007"
+}
+
+## cleans mem cache
+memclean() {
+  if sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"; then
+    echo "Memory cache successfully cleaned."
+  else
+    echo "Failed to clean memory cache. Check permissions."
+  fi
 }
 
 starship_precmd_user_func="set_win_title"

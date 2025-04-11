@@ -1,6 +1,8 @@
 set window-title-basename "true"
 set selection-clipboard "clipboard"
 
+map i recolor
+
 # One page per row by default
 set pages-per-row 1
 
@@ -9,40 +11,44 @@ set scroll-page-aware "true"
 set scroll-full-overlap 0.01
 set scroll-step 100
 
-# Tokyonight color theme for Zathura
-# Swaps Foreground for Background to get a light version if the user prefers
-#
-# Tokyonight color theme
-#
-set notification-error-bg "#f7768e"
-set notification-error-fg "#c0caf5"
-set notification-warning-bg "#e0af68"
-set notification-warning-fg "#414868"
-set notification-bg "#1a1b26"
-set notification-fg "#c0caf5"
-set completion-bg "#1a1b26"
-set completion-fg "#a9b1d6"
-set completion-group-bg "#1a1b26"
-set completion-group-fg "#a9b1d6"
-set completion-highlight-bg "#414868"
-set completion-highlight-fg "#c0caf5"
-set index-bg "#1a1b26"
-set index-fg "#c0caf5"
-set index-active-bg "#414868"
-set index-active-fg "#c0caf5"
-set inputbar-bg "#1a1b26"
-set inputbar-fg "#c0caf5"
-set statusbar-bg "#1a1b26"
-set statusbar-fg "#c0caf5"
-set highlight-color "#e0af68"
-set highlight-active-color "#9ece6a"
-set default-bg "#1a1b26"
-set default-fg "#c0caf5"
-set render-loading true
-set render-loading-fg "#1a1b26"
-set render-loading-bg "#c0caf5"
+# gruvbox
+set notification-error-bg       "rgba(251,241,199,1)"  # bg
+set notification-error-fg       "rgba(157,0,6,1)"      # bright:red
+set notification-warning-bg     "rgba(251,241,199,1)"  # bg
+set notification-warning-fg     "rgba(181,118,20,1)"   # bright:yellow
+set notification-bg             "rgba(251,241,199,1)"  # bg
+set notification-fg             "rgba(121,116,14,1)"   # bright:green
 
-set recolor-lightcolor "#1a1b26"
-set recolor-darkcolor "#c0caf5"
+set completion-bg               "rgba(213,196,161,1)"  # bg2
+set completion-fg               "rgba(60,56,54,1)"     # fg
+set completion-group-bg         "rgba(235,219,178,1)"  # bg1
+set completion-group-fg         "rgba(146,131,116,1)"  # gray
+set completion-highlight-bg     "rgba(7,102,120,1)"    # bright:blue
+set completion-highlight-fg     "rgba(213,196,161,1)"  # bg2
 
-map i recolor
+# Define the color in index mode
+set index-bg                    "rgba(213,196,161,1)"  # bg2
+set index-fg                    "rgba(60,56,54,1)"     # fg
+set index-active-bg             "rgba(7,102,120,1)"    # bright:blue
+set index-active-fg             "rgba(213,196,161,1)"  # bg2
+
+set inputbar-bg                 "rgba(251,241,199,1)"  # bg
+set inputbar-fg                 "rgba(60,56,54,1)"     # fg
+
+set statusbar-bg                "rgba(213,196,161,1)"  # bg2
+set statusbar-fg                "rgba(60,56,54,1)"     # fg
+
+set highlight-color             "rgba(181,118,20,0.5)" # bright:yellow
+set highlight-active-color      "rgba(175,58,3,0.5)"   # bright:orange
+
+set default-bg                  "rgba(251,241,199,1)"  # bg
+set default-fg                  "rgba(60,56,54,1)"     # fg
+set render-loading              true
+set render-loading-bg           "rgba(251,241,199,1)"  # bg
+set render-loading-fg           "rgba(60,56,54,1)"     # fg
+
+# Recolor book content's color
+set recolor-lightcolor          "rgba(251,241,199,1)"  # bg
+set recolor-darkcolor           "rgba(60,56,54,1)"     # fg
+set recolor                     "true"
+set recolor-keephue             "true"                 # keep original color

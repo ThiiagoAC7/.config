@@ -19,14 +19,16 @@ config.enable_tab_bar = true
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 
--- config.window_background_opacity = 0.85
-
--- config.window_background_image = ""
--- config.window_background_image_hsb = {
--- 	brightness = 0.015,
--- 	hue = 1.0,
--- 	saturation = 1.0,
--- }
+local opacity = true
+if opacity then
+    config.window_background_opacity = 0.85
+    config.window_background_image = ""
+    config.window_background_image_hsb = {
+    	brightness = 0.015,
+    	hue = 1.0,
+    	saturation = 1.0,
+    }
+end
 
 config.window_padding = {
 	left = 0,

@@ -1,0 +1,6 @@
+
+[gcloud]
+disabled = true
+
+[python]
+detect_files = ['.python-version', 'Pipfile', '__init__.py','requirements.txt', 'setup.py']
