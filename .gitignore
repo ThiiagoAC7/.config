@@ -1,0 +1,24 @@
+## ignore everything but selected files
+/* 
+
+# include files
+
+!.gitignore
+!README.md
+!starship.toml
+
+# include subdirs
+
+!/btop/**
+!/dunst/**
+!/fastfetch/**
+!/i3/**
+!/picom/**
+!/polybar/**
+!/rofi/**
+!/screenshots/**
+!/scripts/**
+!/wezterm/**
+!/zathura/**
+!/zsh/**
+!/sioyek/**

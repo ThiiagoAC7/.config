@@ -10,10 +10,9 @@ local color_schemes = {
 
 config.color_scheme = color_schemes[3]
 
-config.window_frame = {
-	font = wezterm.font("JetBrainsMono Nerd Font"),
-	font_size = 14,
-}
+config.window_decorations = "RESIZE"
+config.font = wezterm.font "JetBrainsMono Nerd Font"
+config.font_size = 15
 
 config.enable_tab_bar = true
 config.tab_bar_at_bottom = true
@@ -21,7 +20,7 @@ config.use_fancy_tab_bar = false
 
 local opacity = true
 if opacity then
-    config.window_background_opacity = 0.85
+    config.window_background_opacity = 0.98
     config.window_background_image = ""
     config.window_background_image_hsb = {
     	brightness = 0.015,

@@ -9,7 +9,9 @@
     - Top bar organizer
     - Vitals
     - Space Bar
-    - Forge
+    - pop shell
+    - open bar
+    - just perfection
 
 ## Screenshots
 
