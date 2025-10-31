@@ -7,12 +7,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH=$PATH:/home/thiago/.spicetify
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
-
-
 # sudo permission to nvim 
 export SUDO_EDITOR="nvim"
 
@@ -54,7 +48,8 @@ alias ls='exa -l --color=auto'
 ## fzf
 alias f='fzf'
 
-fastfetch
+
+# fastfetch
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -74,6 +69,18 @@ unset __conda_setup
 conda config --set changeps1 False #(disable conda prompt - using it with starship)
 eval "$(starship init zsh)"
 
+
+### android studio
+
+export PATH="$PATH:/home/thiago/android-studio-2024.3.1.13-linux/android-studio/bin"
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+
+alias studio="nohup /home/thiago/android-studio-2024.3.1.13-linux/android-studio/bin/studio.sh > /dev/null 2>&1 &"
+
+
 function set_win_title() { # set window title as cwd
     echo -ne "\033]0; $(basename "$PWD") \007"
 }
@@ -87,5 +94,19 @@ memclean() {
   fi
 }
 
+pdfzf() {
+  RG_PREFIX='rga -t pdf -i -0 --files-with-matches'
+  FZF_DEFAULT_COMMAND="$RG_PREFIX '' ." \
+  fzf --ansi --read0 --phony -q "" \
+      --bind "change:reload:$RG_PREFIX {q} ." \
+      --preview 'rga -t pdf -i --pretty --context 5 {q} -- {}' \
+      --preview-window 'right,60%,wrap' \
+      --keep-right \
+}
+
 starship_precmd_user_func="set_win_title"
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

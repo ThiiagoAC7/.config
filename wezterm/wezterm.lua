@@ -39,13 +39,7 @@ config.window_padding = {
 	bottom = 0,
 }
 
-config.unix_domains = {
-	{
-		name = "unix",
-	},
-}
 config.status_update_interval = 2000
-
 config.window_close_confirmation = "NeverPrompt"
 
 local mux = wezterm.mux
@@ -63,14 +57,13 @@ local function session_info(window)
 end
 
 wezterm.on("gui-startup", function(cmd)
-	---@diagnostic disable-next-line: unused-local
-	local tab, pane, window = mux.spawn_window(cmd or {})
-	window:gui_window():maximize()
+	session_manager.initialize_workspaces()
 end)
 
 wezterm.on("update-status", function(window, pane)
 	local ws, state = session_info(window)
-	local label = string.format("[%s]  |  [%s]", ws, state)
+	-- local label = string.format("[%s]  |  [%s]", ws, state)
+	local label = string.format("[%s]", ws)
 
 	-- Escreve na lateral esquerda da barra de abas
 	window:set_right_status(wezterm.format({
@@ -164,20 +157,6 @@ config.keys = {
 	},
 
 	-- sessions
-	-- Attach to muxer
-	{
-		key = "a",
-		mods = "ALT",
-		action = act.AttachDomain("unix"),
-	},
-
-	-- Detach from muxer
-	{
-		key = "d",
-		mods = "ALT",
-		action = act.DetachDomain({ DomainName = "unix" }),
-	},
-
 	-- Rename current session
 	{
 		key = "r",
@@ -202,12 +181,12 @@ config.keys = {
 	-- Session manager bindings
 	{
 		key = "s",
-		mods = "ALT",
+		mods = "ALT|SHIFT",
 		action = act({ EmitEvent = "save_session" }),
 	},
 	{
-		key = "l",
-		mods = "ALT",
+		key = "c",
+		mods = "ALT|SHIFT",
 		action = act({ EmitEvent = "load_session" }),
 	},
 	{
