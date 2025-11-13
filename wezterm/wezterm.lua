@@ -24,12 +24,13 @@ config.scrollback_lines = 5000
 local opacity = true
 if opacity then
 	config.window_background_opacity = 0.98
-	config.window_background_image = ""
-	config.window_background_image_hsb = {
-		brightness = 0.015,
-		hue = 1.0,
-		saturation = 1.0,
-	}
+	-- not using bg image
+	-- config.window_background_image = ""
+	-- config.window_background_image_hsb = {
+	-- 	brightness = 0.015,
+	-- 	hue = 1.0,
+	-- 	saturation = 1.0,
+	-- }
 end
 
 config.window_padding = {
@@ -42,10 +43,29 @@ config.window_padding = {
 config.status_update_interval = 2000
 config.window_close_confirmation = "NeverPrompt"
 
+config.unix_domains = {
+	{
+		name = "unix",
+	},
+}
+
 local mux = wezterm.mux
 
 local function session_info(window)
-	local ws = window:mux_window():get_workspace()
+	if not window then
+		return "Unknown", "Detached"
+	end
+
+	-- local ws = window:mux_window():get_workspace()
+
+	local mux_window = window:mux_window()
+	local success, ws = pcall(function()
+		return mux_window:get_workspace()
+	end)
+
+	if not success then
+		return "Unknown", "Detached"
+	end
 
 	local domain = mux.get_domain("unix")
 	local state = "Detached"
@@ -75,11 +95,11 @@ end)
 wezterm.on("save_session", function(window)
 	session_manager.save_state(window)
 end)
-wezterm.on("load_session", function(window)
-	session_manager.load_state(window)
-end)
 wezterm.on("restore_session", function(window)
 	session_manager.restore_state(window)
+end)
+wezterm.on("show-workspace-selector", function(window, pane)
+	session_manager.load_state(window)
 end)
 
 local act = wezterm.action
@@ -157,6 +177,20 @@ config.keys = {
 	},
 
 	-- sessions
+
+	-- Attach to unix domain
+	{
+		key = "a",
+		mods = "ALT",
+		action = act.AttachDomain("unix"),
+	},
+
+	{
+		key = "d",
+		mods = "ALT",
+		action = act.DetachDomain({ DomainName = "unix" }),
+	},
+
 	-- Rename current session
 	{
 		key = "r",
@@ -171,24 +205,19 @@ config.keys = {
 		}),
 	},
 
-	-- Show list of workspaces
-	{
-		key = "c",
-		mods = "ALT",
-		action = act.ShowLauncherArgs({ flags = "WORKSPACES" }),
-	},
-
 	-- Session manager bindings
 	{
 		key = "s",
 		mods = "ALT|SHIFT",
 		action = act({ EmitEvent = "save_session" }),
 	},
+	-- Show list of workspaces
 	{
 		key = "c",
-		mods = "ALT|SHIFT",
-		action = act({ EmitEvent = "load_session" }),
+		mods = "ALT",
+		action = act({ EmitEvent = "show-workspace-selector" }),
 	},
+	-- restore previous session manually
 	{
 		key = "r",
 		mods = "ALT",
