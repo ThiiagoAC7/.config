@@ -105,6 +105,9 @@ end)
 wezterm.on("rename_session", function(window)
 	session_manager.rename_state(window)
 end)
+wezterm.on("delete_session", function(window)
+	session_manager.delete_state(window)
+end)
 
 local act = wezterm.action
 
@@ -163,7 +166,6 @@ config.keys = {
 				return pane:get_user_vars().IS_NVIM == "true"
 			end
 
-			wezterm.log_info("inside vim :" .. is_vim())
 			if is_vim() then
 				-- pass the keys through to vim/nvim
 				window:perform_action(wezterm.action.SendKey({ key = "v", mods = "ALT|SHIFT" }), pane)
@@ -212,6 +214,12 @@ config.keys = {
 		key = "r",
 		mods = "ALT",
 		action = act({ EmitEvent = "restore_session" }),
+	},
+	-- delete saved workspace
+	{
+		key = "d",
+		mods = "ALT|SHIFT",
+		action = act({ EmitEvent = "delete_session" }),
 	},
 }
 

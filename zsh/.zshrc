@@ -51,22 +51,6 @@ alias f='fzf'
 
 # fastfetch
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/thiago/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/thiago/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/thiago/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/thiago/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-conda config --set changeps1 False #(disable conda prompt - using it with starship)
 eval "$(starship init zsh)"
 
 
@@ -110,3 +94,7 @@ starship_precmd_user_func="set_win_title"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PATH="/home/thiago/.pixi/bin:$PATH"
+
+# opencode
+export PATH=/home/thiago/.opencode/bin:$PATH
