@@ -7,6 +7,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH=$PATH:/home/thiago/.spicetify
 
+export PATH=$PATH:~/zig/
+
 # sudo permission to nvim 
 export SUDO_EDITOR="nvim"
 
@@ -65,28 +67,10 @@ export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 alias studio="nohup /home/thiago/android-studio-2024.3.1.13-linux/android-studio/bin/studio.sh > /dev/null 2>&1 &"
 
 
-function set_win_title() { # set window title as cwd
-    echo -ne "\033]0; $(basename "$PWD") \007"
-}
-
-## cleans mem cache
-memclean() {
-  if sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"; then
-    echo "Memory cache successfully cleaned."
-  else
-    echo "Failed to clean memory cache. Check permissions."
-  fi
-}
-
-pdfzf() {
-  RG_PREFIX='rga -t pdf -i -0 --files-with-matches'
-  FZF_DEFAULT_COMMAND="$RG_PREFIX '' ." \
-  fzf --ansi --read0 --phony -q "" \
-      --bind "change:reload:$RG_PREFIX {q} ." \
-      --preview 'rga -t pdf -i --pretty --context 5 {q} -- {}' \
-      --preview-window 'right,60%,wrap' \
-      --keep-right \
-}
+# Load custom functions from .dotfiles/zsh/functions
+for file in $HOME/.dotfiles/zsh/functions/*.zsh; do
+  [ -f "$file" ] && source "$file"
+done
 
 starship_precmd_user_func="set_win_title"
 
