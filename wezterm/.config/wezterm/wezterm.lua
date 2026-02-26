@@ -14,8 +14,9 @@ local color_schemes = {
 config.color_scheme = color_schemes[3]
 
 config.window_decorations = "RESIZE"
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font("Iosevka Nerd Font")
 config.font_size = 15
+config.warn_about_missing_glyphs = false
 
 config.enable_tab_bar = true
 config.tab_bar_at_bottom = true
