@@ -50,6 +50,8 @@ alias ls='exa -l --color=auto'
 ## fzf
 alias f='fzf'
 
+## JUST
+alias jg='just -g'
 
 # fastfetch
 

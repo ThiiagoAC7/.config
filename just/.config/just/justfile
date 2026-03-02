@@ -1,0 +1,13 @@
+
+default:
+    @just --justfile {{justfile()}} --list
+
+# hello world test
+hello:
+    echo "Hello !"
+
+# Copy rclone config files (.rcloneignore, justfile) into the current directory
+init:
+    cp $HOME/.dotfiles/scripts/.config/scripts/rclone/.rcloneignore .
+    cp $HOME/.dotfiles/scripts/.config/scripts/rclone/justfile .
+
