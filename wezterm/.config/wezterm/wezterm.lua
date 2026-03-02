@@ -84,10 +84,23 @@ end)
 
 wezterm.on("update-status", function(window, pane)
 	local ws, state = session_info(window)
-	-- local label = string.format("[%s]  |  [%s]", ws, state)
-	local label = string.format("[%s]", ws)
 
-	-- Escreve na lateral esquerda da barra de abas
+	local curr_tab = pane:tab()
+	local is_zoomed = false
+	if curr_tab ~= nil then
+		for _, pane_attributes in pairs(curr_tab:panes_with_info()) do
+			is_zoomed = pane_attributes.is_zoomed or is_zoomed
+		end
+	end
+
+	local zoom_indicator = ""
+	if is_zoomed then
+		zoom_indicator = "[MAX]"
+	end
+
+	ws = string.format("[%s]", ws)
+	local label = string.format("%s %s", zoom_indicator, ws)
+
 	window:set_right_status(wezterm.format({
 		{ Text = " " .. label .. " " },
 	}))
