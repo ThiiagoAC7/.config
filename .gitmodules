@@ -1,0 +1,6 @@
+[submodule "wezterm/.config/wezterm/wezterm-session-manager"]
+	path = wezterm/.config/wezterm/wezterm-session-manager
+	url = https://github.com/ThiiagoAC7/wezterm-session-manager
+[submodule "nvim/.config/nvim"]
+	path = nvim/.config/nvim
+	url = https://github.com/ThiiagoAC7/nvim
