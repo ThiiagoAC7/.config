@@ -8,12 +8,21 @@ export NVM_DIR="$HOME/.nvm"
 export PATH=$PATH:/home/thiago/.spicetify
 
 export PATH=$PATH:~/zig/
+export PATH=$PATH:$(go env GOPATH)/bin
+
+export PATH="/home/thiago/.pixi/bin:$PATH"
+export PATH="$HOME/.pixi/envs/python/bin:$PATH"
 
 # sudo permission to nvim 
 export SUDO_EDITOR="nvim"
 
+export PATH="$HOME/qt/6.8.2/gcc_64/bin:$PATH"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME=""
@@ -25,7 +34,7 @@ ZSH_THEME=""
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(git 
-         z 
+         # z 
          zsh-autosuggestions 
          zsh-syntax-highlighting
          command-not-found
@@ -55,6 +64,7 @@ alias jg='just -g'
 
 # fastfetch
 
+eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 
@@ -80,7 +90,11 @@ starship_precmd_user_func="set_win_title"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-export PATH="/home/thiago/.pixi/bin:$PATH"
+
 
 # opencode
 export PATH=/home/thiago/.opencode/bin:$PATH
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/thiago/.local/bin:$PATH"

@@ -122,6 +122,9 @@ end)
 wezterm.on("delete_session", function(window)
 	session_manager.delete_state(window)
 end)
+wezterm.on("quit_session", function(window)
+	session_manager.quit_state(window)
+end)
 
 local act = wezterm.action
 
@@ -192,18 +195,18 @@ config.keys = {
 
 	-- sessions
 
-	-- Attach to unix domain
-	{
-		key = "a",
-		mods = "ALT",
-		action = act.AttachDomain("unix"),
-	},
-
-	{
-		key = "d",
-		mods = "ALT",
-		action = act.DetachDomain({ DomainName = "unix" }),
-	},
+	-- -- Attach to unix domain
+	-- {
+	-- 	key = "a",
+	-- 	mods = "ALT",
+	-- 	action = act.AttachDomain("unix"),
+	-- },
+	--
+	-- {
+	-- 	key = "d",
+	-- 	mods = "ALT",
+	-- 	action = act.DetachDomain({ DomainName = "unix" }),
+	-- },
 
 	{
 		key = "r",
@@ -235,6 +238,22 @@ config.keys = {
 		mods = "ALT|SHIFT",
 		action = act({ EmitEvent = "delete_session" }),
 	},
+	-- quit current workspace
+	{
+		key = "q",
+		mods = "ALT|SHIFT",
+		action = act({ EmitEvent = "quit_session" }),
+	},
 }
+
+for i = 1, 9 do
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "ALT",
+		action = wezterm.action_callback(function(window, pane)
+			session_manager.switch_workspace_by_index(window, i)
+		end),
+	})
+end
 
 return config
