@@ -15,6 +15,7 @@ export PATH="$HOME/.pixi/envs/python/bin:$PATH"
 
 # sudo permission to nvim 
 export SUDO_EDITOR="nvim"
+alias snvim="sudo -E /opt/nvim/nvim"
 
 export PATH="$HOME/qt/6.8.2/gcc_64/bin:$PATH"
 
